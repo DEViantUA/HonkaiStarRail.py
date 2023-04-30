@@ -1,6 +1,13 @@
 # Copyright 2023 DEViantUa <t.me/deviant_ua>
 # All rights reserved.
 
+'''
+This method returns only 4 star and 5 star pins, but at 
+the same time it counts how much you have left until the 
+guarantor and at what twist this or that character fell out
+'''
+
+
 import asyncio
 from starrail import starrail
 
