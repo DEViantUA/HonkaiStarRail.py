@@ -9,7 +9,7 @@ guarantor and at what twist this or that character fell out
 
 
 import asyncio
-from starrail import starrail
+from honkaistarrail import starrail
 
 async def get_jump_gacha():
     link = ""
