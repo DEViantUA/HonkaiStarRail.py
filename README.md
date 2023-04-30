@@ -8,6 +8,7 @@ At the moment it only supports counting guarantors and getting a jumps
 ```
 pip install honkaistarrail
 ```
+PyPi: [OPEN](https://pypi.org/project/honkaistarrail/)
 
 You can also see other usage examples here: [OPEN](https://github.com/DEViantUA/starrail.py/tree/main/Examples)
 
