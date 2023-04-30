@@ -8,7 +8,7 @@ and how much is left before the guarantor.
 '''
 
 import asyncio
-from starrail import starrail
+from honkaistarrail import starrail
 
 async def get_jump_history():
     link = ""
