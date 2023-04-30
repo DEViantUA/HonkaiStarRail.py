@@ -1,4 +1,4 @@
-# StarRail.py
+# HonkaiStarRail.py
 
 # Asynchronous module for working with API Honkai: Star Rail
 
@@ -6,7 +6,7 @@ At the moment it only supports counting guarantors and getting a jumps
 
 ### Installation: 
 ```
-pip install starrail
+pip install honkaistarrail
 ```
 
 ### Launc:
