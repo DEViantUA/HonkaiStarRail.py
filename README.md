@@ -9,6 +9,16 @@ At the moment it only supports counting guarantors and getting a jumps
 pip install honkaistarrail
 ```
 
+You can also see other usage examples here: [OPEN](https://github.com/DEViantUA/starrail.py/tree/main/Examples)
+
+Instructions for getting a link to the history of jumps: [OPEN](https://github.com/DEViantUA/starrail.py/blob/main/Instruction.md)
+
+### ID Banned:
+``1`` - Event Banner
+``2`` - Light Cone
+``3`` - Standart Banner
+
+
 ### Launc:
 
 ```py
@@ -35,7 +45,5 @@ async def get_jump_history():
 asyncio.run(get_jump_history())
 ```
 
-You can also see other usage examples here: [OPEN](https://github.com/DEViantUA/starrail.py/tree/main/Examples)
 
-Instructions for getting a link to the history of jumps: [OPEN](https://github.com/DEViantUA/starrail.py/blob/main/Instruction.md)
 
