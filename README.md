@@ -1,4 +1,6 @@
-# HonkaiStarRail.py
+<p align="center">
+  <img src="https://raw.githubusercontent.com/DEViantUA/HonkaiStarRail.py/main/Readme/HSR-BANNER.png" />
+</p>
 
 # Asynchronous module for working with API Honkai: Star Rail
 
