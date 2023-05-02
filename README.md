@@ -49,4 +49,9 @@ asyncio.run(get_jump_history())
 ```
 
 
+#In developing:
 
+1. Automatic receipt of a link to the journal.
+2. Return of images in jumps.
+3. Automatic code redemption.
+4. Automatic collection of daily marks on HoYoLab.
