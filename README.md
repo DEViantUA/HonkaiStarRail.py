@@ -49,7 +49,7 @@ asyncio.run(get_jump_history())
 ```
 
 
-#In developing:
+# In developing:
 
 1. Automatic receipt of a link to the journal.
 2. Return of images in jumps.
