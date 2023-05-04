@@ -55,3 +55,8 @@ asyncio.run(get_jump_history())
 2. Return of images in jumps.
 3. Automatic code redemption.
 4. Automatic collection of daily marks on HoYoLab.
+
+___
+<p align="center">
+  <img src="https://raw.githubusercontent.com/DEViantUA/HonkaiStarRail.py/main/Readme/%D0%91%D0%B5%D0%B7-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.png" />
+</p>
