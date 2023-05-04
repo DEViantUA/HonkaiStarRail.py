@@ -13,7 +13,7 @@ from honkaistarrail import starrail
 
 async def get_jump_gacha():
     link = ""
-    async with starrail.Jump(link,1,"en") as hist:
+    async with starrail.Jump(link = link,banner = 1,lang = "en") as hist:
         result = await hist.get_gacha()
         print(f"Total jump: {result.total}")
 
