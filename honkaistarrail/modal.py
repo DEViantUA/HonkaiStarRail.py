@@ -3,6 +3,10 @@ from datetime import datetime
 from typing import List
 
 
+class ImageGacha(BaseModel):
+    icon: str
+    full: str
+
 class JumpRecord(BaseModel):
     uid: int
     id: int

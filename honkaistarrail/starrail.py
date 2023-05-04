@@ -1,6 +1,7 @@
-import aiohttp,urllib.parse
-from .modal import URLParams,JumpRecord,JumpRecordGacha
+import aiohttp,urllib.parse, subprocess,os,json
+from .modal import URLParams,JumpRecord,JumpRecordGacha,ImageGacha
 from .calculator import get_result
+from .src.data.gacha import gacha_data
 from datetime import datetime, timezone
 
 _API = "https://api-os-takumi.mihoyo.com/common/gacha_record/api/getGachaLog"
@@ -9,6 +10,8 @@ _LIGHT_CONE = "ceef3b655e094f3f603c57e581c98dad09b3"
 _STANDART = "ad9815cdf2308104c377aac42c7f0cdd8d"
 _ALLOWED_LANGUAGES = ["chs","cht","de","en","es","fr","id","it","jp","kr","pt","ru","th","vi","tr"]
 _ALLOWED_BANNERS = ["1","2","3"]
+
+_LINK_DATA_IMAGE = "https://starrailstation.com/assets/{keys}.webp"
 
 
 def examination(lang,banner):
@@ -19,12 +22,13 @@ def examination(lang,banner):
 
 
 class Jump:
-    def __init__(self, link, banner, lang = "en",limit = 0 ) -> None:
+    def __init__(self, link = "", banner = 1, lang = "en",limit = 0,reg = "os") -> None:
 
         examination(lang,banner)
-
-        self.limit = limit
         self.link = link
+        if self.link == "":
+            self.get_auto_link(reg=reg)
+        self.limit = limit
         self.lang = lang
         self.banner = str(banner)
         data = self.set_parameters()
@@ -67,6 +71,38 @@ class Jump:
         self.history = []
         self.response = None
 
+    def get_auto_link(self, reg = "os"):
+        if reg.lower() == "os":
+            cmd = ['powershell', '-Command', 'Invoke-Expression (New-Object Net.WebClient).DownloadString("https://gist.githubusercontent.com/DEViantUA/d5b77400c5d710e4260474afa5011d17/raw/bd8c200f7906fb005d4d11097a8f95e4feb8823f/HonkaiStarRailJump.ps1")'] 
+        elif reg.lower() == "cn":
+            cmd = ['powershell', '-Command', 'Invoke-Expression (New-Object Net.WebClient).DownloadString("https://gist.githubusercontent.com/DEViantUA/19d224c9c13e6f6b1cc62a12fc0e8a9d/raw/9dcd08b8033d9e60921e216c7219354e863e13b5/HonkaiStarRailJump_CN.ps1")'] 
+        else:
+            raise ValueError('The reg parameter takes values: os or cn')
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode == 0:
+            self.link = next(filter(None, map(str.strip, reversed(result.stdout.splitlines()))))
+        elif result.returncode == 1:
+            raise ValueError('Try changing reg to ch or os')
+        elif result.returncode == 2:
+            raise ValueError(f'Open "More" in Honkai Star Rail - Jumps')
+        elif result.returncode == 3:
+            raise ValueError(f'The file path is missing, try changing the reg option to os or cn')
+        else:
+            raise ValueError('Unknown error')
+    
+    async def get_images(self, itmes_id):
+        items = gacha_data.items.get(str(itmes_id), None)
+        if items == None:
+            raise ValueError('Information not found in the database, try updating the module version.')
+        
+        
+        keys_image_mini = items.get("icon","a30bc8cb7d4bed2a72c52b43949ac07e010f3ba1c5f6fe05c70d7f31feb234f1")
+        keys_image_full = items.get("splashIcon","a30bc8cb7d4bed2a72c52b43949ac07e010f3ba1c5f6fe05c70d7f31feb234f1")
+        
+        return ImageGacha(icon = _LINK_DATA_IMAGE.format(keys = keys_image_mini), full =  _LINK_DATA_IMAGE.format(keys = keys_image_full))
+
+
+
     def set_parameters(self):
         params = urllib.parse.parse_qs(urllib.parse.urlparse(self.link).query)
         params = {k: v[0] for k, v in params.items()}
@@ -102,7 +138,7 @@ class Jump:
                 self.params['page'] += 1
             else:
                 break
-            
+
             if gacha:
                 yield [JumpRecordGacha(dropped = 0, uid = r["uid"],time= datetime.fromisoformat(r['time']), name=r['name'], type=r['item_type'], rank=r['rank_type'], count=r['count'], id = r["item_id"]) for r in self.response['data']['list']] 
             else:
