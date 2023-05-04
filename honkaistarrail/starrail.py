@@ -1,4 +1,4 @@
-import aiohttp,urllib.parse, subprocess,os,json
+import aiohttp,urllib.parse, subprocess
 from .modal import URLParams,JumpRecord,JumpRecordGacha,ImageGacha
 from .calculator import get_result
 from .src.data.gacha import gacha_data
