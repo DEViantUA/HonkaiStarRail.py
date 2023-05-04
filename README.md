@@ -15,6 +15,7 @@ PyPi: [OPEN](https://pypi.org/project/honkaistarrail/)
 You can also see other usage examples here: [OPEN](https://github.com/DEViantUA/starrail.py/tree/main/Examples)
 
 Instructions for getting a link to the history of jumps: [OPEN](https://github.com/DEViantUA/starrail.py/blob/main/Instruction.md)
+You also can not get the link manually, just open the magazine in the game and do not pass the link parameter, then the code will automatically get it.
 
 ### ID Banned:
 ``1`` - Event Banner
